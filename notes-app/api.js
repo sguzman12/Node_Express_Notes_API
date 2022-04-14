@@ -1,5 +1,9 @@
 import express from "express";
 import { readTextFile, readJsonFile } from "./util/fileRead.js";
+import {
+  insertNoteIntoTxtFile,
+  insertNoteIntoJsonFile,
+} from "./util/fileWrite.js";
 import { convertJSON } from "./util/conversion.js";
 
 const app = express();
@@ -18,6 +22,12 @@ app.get("/", (req, res) => {
       res.send("No data found");
     }
   });
+});
+
+app.post("/", (req, res) => {
+  const message = req.query.message;
+  // insertNoteIntoTxtFile(message);
+  insertNoteIntoJsonFile(message);
 });
 
 app.listen(port, () => {
